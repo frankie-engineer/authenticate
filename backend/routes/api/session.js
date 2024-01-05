@@ -6,7 +6,7 @@ const { User } = require('../../db/models');
 
 const router = express.Router();
 
-// Log in
+// Log In
 router.post(
     '/',
     asyncHandler(async (req, res, next) => {
@@ -29,6 +29,15 @@ router.post(
             user
         });
     })
+);
+
+// Log Out
+router.delete(
+    '/',
+    (_req, res) => {
+        res.clearCookie('token');
+        return res.json({ message: 'success' });
+    }
 );
 
 module.exports = router;
