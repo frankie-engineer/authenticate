@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import '../../components/Forms.css';
 
-function LoginFormPage() {
+function SignupFormPage() {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const [credential, setCredential] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
     const [errors, setErrors] = useState([]);
 
     if (sessionUser) return (
@@ -19,12 +21,16 @@ function LoginFormPage() {
         e.preventDefault();
         setErrors([]);
 
-        return dispatch(sessionActions.login({ credential, password }))
-            // if the promise is rejected
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
-            });
+        if (password === confirmPassword) {
+            return dispatch(sessionActions.signup({ credential, password }))
+                // if the promise is rejected
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
+                });
+        } else {
+            setErrors([...errors, "Passwords must match."]);
+        }
     }
 
     return (
@@ -50,9 +56,18 @@ function LoginFormPage() {
                     required
                 />
             </label>
-            <button type="submit">Log In</button>
+            <label>
+                Confirm Password
+                <input
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                />
+            </label>
+            <button type="submit">Sign Up</button>
         </form>
     );
 }
 
-export default LoginFormPage;
+export default SignupFormPage;

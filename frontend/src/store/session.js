@@ -3,14 +3,14 @@ import { csrfFetch } from "./csrf";
 export const ADD_USER = "session/ADD_USER";
 export const REMOVE_USER = "session/REMOVE_USER";
 
-const addSessionUser = (user) => {
+const setUser = (user) => {
     return {
         type: ADD_USER,
         payload: user
     }
 }
 
-const removeSessionUser = () => {
+const removeUser = () => {
     return {
         type: REMOVE_USER,
     }
@@ -27,11 +27,27 @@ export const login = (user) => async dispatch => {
     });
 
     const data = await response.json();
-    dispatch(addSessionUser(data.user));
+    dispatch(setUser(data.user));
     return response;
 }
 
-// Restore User after Referesh
+export const signup = (user) => async dispatch => {
+    const { username, email, password } = user;
+    const response = await csrfFetch(`/api/session`, {
+        method: 'POST',
+        body: JSON.stringify({
+            username,
+            email,
+            password
+        })
+    });
+
+    const data = await response.json();
+    dispatch(setUser(data.user));
+    return response;
+}
+
+// Restore User after Refresh
 export const restoreUser = () => async dispatch => {
     const response = await csrfFetch('/api/session');
     const data = await response.json();
