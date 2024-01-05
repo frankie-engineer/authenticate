@@ -1,37 +1,32 @@
-import React, { useState } from 'react';
-import * as sessionActions from '../../store/session';
-import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import '../../components/Forms.css';
+// frontend/src/components/SignupFormPage/index.js
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
+import * as sessionActions from "../../store/session";
 
 function SignupFormPage() {
     const dispatch = useDispatch();
-    const sessionUser = useSelector(state => state.session.user);
-    const [credential, setCredential] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-
+    const sessionUser = useSelector((state) => state.session.user);
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
 
-    if (sessionUser) return (
-        <Redirect to="/" />
-    );
+    if (sessionUser) return <Redirect to="/" />;
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setErrors([]);
-
         if (password === confirmPassword) {
-            return dispatch(sessionActions.signup({ credential, password }))
-                // if the promise is rejected
+            setErrors([]);
+            return dispatch(sessionActions.signup({ email, username, password }))
                 .catch(async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);
                 });
-        } else {
-            setErrors([...errors, "Passwords must match."]);
         }
-    }
+        return setErrors(['Confirm Password field must be the same as the Password field']);
+    };
 
     return (
         <form onSubmit={handleSubmit}>
@@ -39,11 +34,20 @@ function SignupFormPage() {
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
             <label>
-                Username or Email
+                Email
                 <input
                     type="text"
-                    value={credential}
-                    onChange={(e) => setCredential(e.target.value)}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
+            </label>
+            <label>
+                Username
+                <input
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     required
                 />
             </label>
