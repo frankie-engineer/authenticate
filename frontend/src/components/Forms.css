@@ -1,83 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
-
-html,
-body,
-input,
-textarea,
-button,
-select,
-a {
-    font-family: 'Open Sans';
-    font-size: 16px;
-}
-
-button {
-    border: 0;
-    background: none;
-    font-weight: 700;
-    padding: .5em 1em;
-    text-transform: uppercase;
-    transition: background-color .25s, color .25s;
-    cursor: pointer;
-}
-
-button:disabled {
-    cursor: default;
-}
-
-button:hover {
-    background-color: blueviolet;
-    color: white;
-}
-
-main {
-    bottom: 0;
-    display: flex;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 form {
-    flex: 0 0 400px;
+    display: flex;
+    flex-direction: column;
     width: 50%;
+    padding: 20px;
+    background-color: lightblue;
+    border-radius: 10px;
+    margin: 20px;
 }
 
-h1 {
-    font-weight: 400;
+label {
+    padding-block: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+i {
+    font-size: 20px;
 }
 
 input {
-    border: 0;
-    border-bottom: 2px solid #CCC;
-    box-sizing: border-box;
-    display: block;
-    outline: 0;
-    padding: .25em .5em;
-    width: 100%;
+    margin-block: 10px;
+    border: none;
+
 }
 
-.item-form input {
-    margin-bottom: 2em;
+.submit {
+    margin: 20px;
+    width: 100px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: lightgrey;
 }
 
-input:focus {
-    border-bottom-color: blueviolet;
-}
-
-nav {
-    flex: 0 0 300px;
-    overflow-y: auto;
-}
-
-nav a {
-    color: inherit;
-    text-decoration: none;
-}
-
-select {
-    width: 100%;
-    margin-top: 10px;
-    padding-left: 4px;
+.submit:hover {
+    background-color: grey;
 }

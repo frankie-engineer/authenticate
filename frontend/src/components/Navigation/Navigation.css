@@ -1,0 +1,32 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 10px;
+    list-style: none;
+    color: black;
+    text-decoration: none;
+}
+
+/* li {
+    border-bottom: 1px solid;
+} */
+
+a {
+    color: black;
+}
+
+a:hover {
+    /* background-color: lightblue;
+    border-radius: 10px; */
+    background-color: lightblue;
+    border-radius: 10px;
+}
+
+button {
+    border: none;
+}
+
+.profile-dropdown {
+    margin-left: 80px;
+    background-color: lightblue;
+    width: fit-content;
+}
