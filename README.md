@@ -1,5 +1,5 @@
 # 🌊 authenticate 
-Full stack app with authentication built from scratch with CSRF (Cross-Site Request Forgery) security middleware, database validations, and error-catching.
+Authentication built from scratch with CSRF (Cross-Site Request Forgery) security middleware, database validations, and error-catching.
 
 ## Built With
 - `bcryptjs` - password hashing
